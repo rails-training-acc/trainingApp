@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <h1><%= full_page_title(yield(:title)) %></h1>
 <%= yield %>
 
 </body>
