@@ -3,31 +3,32 @@ require 'spec_helper'
 describe "StaticPages" do
 
   let(:proj_title) { "ShuffleBoard" }
+  subject { page }
 
   describe "Home page" do
 
+    before(:each) { visit root_path }
+
     it "should have content 'ShuffleBoard'" do
-      visit '/static_pages/home'
-      page.should have_content("#{proj_title}")
+      should have_content("#{proj_title}")
     end
 
-    it "should have selector 'p' with 'I love Ruby'" do
-      visit '/static_pages/home'
-      page.should have_selector('p', :text=>"I love Ruby")
+    it "should have selector 'h2' with 'We love Ruby'" do
+      should have_selector('h2', :text=>"We love Ruby")
     end
   end
 
   describe "Help page" do
     it "should have selector h1 with text 'ShuffleBoard | Help Page'" do
-      visit '/static_pages/help'
-      page.should have_selector('h1', :text=>"#{proj_title} | Help Page")
+      visit help_path
+      should have_selector('h1', :text=>"#{proj_title} | Help Page")
     end
   end
 
   describe "Contacts page" do
     it "should have content ShuffleBoard" do
-      visit '/static_pages/contacts'
-      page.should have_content("#{proj_title}")
+      visit contacts_path
+      should have_content("#{proj_title}")
     end
   end
 end

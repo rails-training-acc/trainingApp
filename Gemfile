@@ -6,6 +6,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'jquery-rails'
+gem 'bootstrap-sass', '2.1'
 
 gem 'execjs', '1.4.0'
 gem 'therubyracer', '0.11.4', :platforms => :ruby
