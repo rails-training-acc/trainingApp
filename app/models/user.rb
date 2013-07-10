@@ -27,4 +27,11 @@ class User < ActiveRecord::Base
   before_save do |user|
    user.email = email.downcase 
   end
+
+  protected
+
+  def verify_image
+    # For issue #5 and issue #3
+    true
+  end
 end
