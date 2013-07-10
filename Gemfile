@@ -11,9 +11,13 @@ gem 'bootstrap-sass', '2.1'
 gem 'execjs', '1.4.0'
 gem 'therubyracer', '0.11.4', :platforms => :ruby
 
+group :development do
+  gem 'annotate', '2.5.0'
+end
+
 group :development, :test do
   gem 'sqlite3', '1.3.5'
-  gem 'mongoid', '~> 3.0.0'
+  # gem 'mongoid', '~> 3.0.0'
   gem 'rspec-rails', '2.11.0'
   gem 'guard-rspec', '1.2.1'
   gem 'guard-spork', '1.2.0'
@@ -32,7 +36,7 @@ group :test do
 end
 
 group :production do
-  gem 'mongoid', '~> 3.0.0'
+  # gem 'mongoid', '~> 3.0.0'
 end
 
 # Gems used only for assets and not required
