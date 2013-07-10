@@ -1,6 +1,8 @@
 Lesson2::Application.routes.draw do
+  match '/signup', to: "users#new"
+
   match '/help', to: "static_pages#help"
-  match 'contacts', to: "static_pages#contacts"
+  match '/contacts', to: "static_pages#contacts"
   
   root to: "static_pages#home"
 
