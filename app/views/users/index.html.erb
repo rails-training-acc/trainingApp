@@ -1,0 +1,24 @@
+
+<% provide(:title, "Users") %>
+
+<table class="table table-hover">
+	<h2>All users: </h2>
+	<thead>
+		<th>#</th>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user.id %></td>
+			<td><%= link_to user.name, user %></td>
+			<td><%= user.email %></td>
+			<td><%= link_to "<i class=\"icon-pencil icon-white\"></i>Edit".html_safe, edit_user_path(user), :class => "btn btn-warning" %></td>
+			<td><%= link_to "<i class=\"icon-trash icon-white\"></i>Delete".html_safe, user, method: :delete, data: { confirm: "You sure?" }, :class => "btn btn-danger" %></td>
+		</tr>	
+		<% end %>
+	</tbody>
+</table>
