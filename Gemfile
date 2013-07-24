@@ -8,6 +8,8 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '2.1'
 gem 'bcrypt-ruby', '3.0.1'
+gem 'mongo_mapper', '0.12.0'
+gem 'bson_ext', '1.9.1'
 
 gem 'execjs', '1.4.0'
 gem 'therubyracer', '0.11.4', :platforms => :ruby
