@@ -37,8 +37,14 @@ class ComplexityValidator < ActiveModel::EachValidator
   end
 end
 
-class User < ActiveRecord::Base
-  has_secure_password
+class User
+  include MongoMapper::Document
+
+  key :has_secure_password, Boolean
+  key :name, String, :required => true
+  key :email, String, :required => true
+  key :password, String, :required => true
+  key :password_confirmation, String, :required => true
 
   include ActiveModel::Validations
   attr_accessible :email, :name, :password, :password_confirmation
