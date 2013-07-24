@@ -14,7 +14,11 @@ require 'spec_helper'
 describe User do
 
   before { @user = User.new(name: "John Doe", email: "jd@example.com",
+<<<<<<< HEAD
+                           password: 'Qwerty123', password_confirmation: 'Qwerty123') }
+=======
                            password: 'Password123', password_confirmation: 'Password123') }
+>>>>>>> 3e3314a626a9c75d615072482be7516d93d63ea2
 
   subject { @user }
 
@@ -30,10 +34,9 @@ describe User do
 
   it { should_not respond_to(:age) }
 
+  it { should be_valid }
 
   describe "should be valid" do
-
-    it { should be_valid }
     
     describe "when name is there" do
       before { @user.name = "Jane Doe" }

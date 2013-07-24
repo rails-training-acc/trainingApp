@@ -10,18 +10,22 @@
 #
 
 require 'spec_helper'
+require 'rspec/expectations'
 
 describe User do
 
-  before { @user = User.new(name: "John Doe", email: "jd@example.com",
-                           password: 'Password123', password_confirmation: 'Password123') }
+  before do 
+    User.delete_all # TODO: Deletion through external routine
+
+    @user = User.new(name: "John Doe", email: "jd@example.com",
+                     password: 'Password123', password_confirmation: 'Password123') 
+  end
 
   subject { @user }
 
   it { should respond_to(:name) }
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
-
 
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
@@ -30,11 +34,10 @@ describe User do
 
   it { should_not respond_to(:age) }
 
+  it { should be_valid }
 
   describe "should be valid" do
 
-    it { should be_valid }
-    
     describe "when name is there" do
       before { @user.name = "Jane Doe" }
       it { should be_valid }
@@ -56,6 +59,7 @@ describe User do
       before { @user.image_url = "http://www.google.com/images/srpr/logo4w.png" }
       it { should be_valid }
     end
+
 
     describe "when no userpic" do
       before { @user.image_url = "" }
@@ -85,6 +89,7 @@ describe User do
       before { @user.email = "" }
       it { should_not be_valid }
     end
+ 
 
     describe "when email is invalid" do
       before { @user.email = "jewnnwiovweoinvieownv" }

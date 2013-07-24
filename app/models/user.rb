@@ -48,14 +48,16 @@ end
 
 class User
   include MongoMapper::Document
-
-  key :has_secure_password, Boolean
-  key :name, String, :required => true
-  key :email, String, :required => true
-  key :password, String, :required => true
-  key :password_confirmation, String, :required => true
-
   include ActiveModel::Validations
+  include ActiveModel::SecurePassword
+
+  key :name, String, :required => true
+  key :email, String, # :unique => true, 
+    :required => true
+  key :password_digest, String, :required => true
+  key :image_url, String
+  has_secure_password
+
   attr_accessible :email, :name, :password, :password_confirmation, :image_url
 
   validates :name, presence: true, length: { maximum: 32}
@@ -63,15 +65,15 @@ class User
   EMAIL_REGEXP = /^[\w]+[\+\.\-\w]*+@[a-z\d\-.]+\.[a-z]+$/i
   validates :email, presence: true, format: { with: EMAIL_REGEXP },
       uniqueness: { case_sensitive: false }
-
-  validates :password, presence: true, length: { minimum: 6 }, 
-      complexity: { value: true, message: "not strong enough" } 
-  validates_confirmation_of :password
-
-  validates :password_confirmation, presence: true
-
-  validates :image_url, :allow_blank => true, image: true
-
+ 
+   validates :password, presence: true, length: { minimum: 6 }, 
+       complexity: { value: true, message: "not strong enough" } 
+   validates_confirmation_of :password
+ 
+   validates :password_confirmation, presence: true
+ 
+   validates :image_url, :allow_blank => true, image: true
+ 
   before_save do |user|
    user.email = email.downcase 
   end
