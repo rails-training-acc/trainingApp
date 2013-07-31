@@ -58,7 +58,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: EMAIL_REGEXP },
       uniqueness: { case_sensitive: false }
 
-  validates :password, presence: true, length: { minimum: 6 }, complexity: true 
+  validates :password, presence: true, length: { minimum: 6 }, 
+      complexity: { value: true, message: "not strong enough" } 
   validates_confirmation_of :password
 
   validates :password_confirmation, presence: true
