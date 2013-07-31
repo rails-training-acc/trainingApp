@@ -1,3 +1,4 @@
+require 'open-uri'
 # == Schema Information
 #
 # Table name: users
@@ -8,6 +9,14 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+class ImageValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    if (!open(value).content_type.include? "image")
+      record.errors.add attribute, (options[:message] || "is not an image")
+    end
+  end
+end
+
 class ComplexityValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value) 
     minSuccess  = 3 || options[:minSuccess]
@@ -41,7 +50,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   include ActiveModel::Validations
-  attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessible :email, :name, :password, :password_confirmation, :image_url
 
   validates :name, presence: true, length: { maximum: 32}
 
@@ -55,14 +64,9 @@ class User < ActiveRecord::Base
 
   validates :password_confirmation, presence: true
 
+  validates :image_url, :allow_blank => true, image: true
+
   before_save do |user|
    user.email = email.downcase 
-  end
-
-  protected
-
-  def verify_image
-    # For issue #5 and issue #3
-    true
   end
 end

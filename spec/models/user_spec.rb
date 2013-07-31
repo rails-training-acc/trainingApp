@@ -14,7 +14,7 @@ require 'spec_helper'
 describe User do
 
   before { @user = User.new(name: "John Doe", email: "jd@example.com",
-                           password: 'Qwerty123', password_confirmation: 'Qwerty123') }
+                           password: 'Password123', password_confirmation: 'Password123') }
 
   subject { @user }
 
@@ -49,6 +49,16 @@ describe User do
           @user.should be_valid
         end
       end
+    end
+
+    describe "when userpic is valid" do
+      before { @user.image_url = "http://www.google.com/images/srpr/logo4w.png" }
+      it { should be_valid }
+    end
+
+    describe "when no userpic" do
+      before { @user.image_url = "" }
+      it { should be_valid }
     end
 
   end
@@ -102,6 +112,11 @@ describe User do
 
     describe "when password_confirmation is not present" do
       before { @user.password_confirmation = nil }
+      it { should_not be_valid }
+    end
+
+    describe "when userpic is not an image" do
+      before { @user.image_url = "http://www.google.com" }
       it { should_not be_valid }
     end
 
