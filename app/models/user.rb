@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   include ActiveModel::Validations
-  attr_accessible :email, :name, :password, :password_confirmation, :image_url
+  attr_accessible :email, :name, :password, :password_confirmation, :image_url 
 
   validates :name, presence: true, length: { maximum: 32}
 
@@ -67,6 +67,18 @@ class User < ActiveRecord::Base
   validates :image_url, :allow_blank => true, image: true
 
   before_save do |user|
-   user.email = email.downcase 
+   user.email = email.downcase
+  end
+  before_create :create_remember_token
+
+  def User.new_remember_token 
+    SecureRandom.urlsafe_base64
+  end
+  def User.encrypt(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+  private  
+  def create_remember_token
+    self.remember_token = User.new_remember_token
   end
 end
