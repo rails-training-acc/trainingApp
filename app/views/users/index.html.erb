@@ -18,8 +18,8 @@
 			<td><%= link_to user.name, user %></td>
 			<td><%= user.email %></td>
             <td><%= user.image_url.present? ? image_tag(user.image_url, :size => "50x50") : image_tag("gravatar-user.png", :size => "50x50")%></td>
-			<td><%= link_to "<i class=\"icon-pencil icon-white\"></i>Edit".html_safe, edit_user_path(user), :class => "btn btn-warning" %></td>
-			<td><%= link_to "<i class=\"icon-trash icon-white\"></i>Delete".html_safe, user, method: :delete, data: { confirm: "You sure?" }, :class => "btn btn-danger" %></td>
+			<td><%= link_to "<i class=\"icon-pencil icon-white\"></i>Edit".html_safe, edit_user_path(user), :class => "btn btn-warning" if sign_in? %></td>
+			<td><%= link_to "<i class=\"icon-trash icon-white\"></i>Delete".html_safe, user, method: :delete, data: { confirm: "You sure?" }, :class => "btn btn-danger" if sign_in? %></td>
 		</tr>	
 		<% end %>
 	</tbody>
