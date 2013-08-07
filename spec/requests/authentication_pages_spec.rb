@@ -46,6 +46,11 @@ describe "Authentication" do
         it { should have_selector('title', text: 'Sign in') }
       end # visit edit
 
+      describe "submitting data to update action" do
+        before { put user_path(user) }
+        specify { expect(response).to redirect_to(signin_path) }
+      end # submit update
+
     end # non signed in
   end # authorize
 end
