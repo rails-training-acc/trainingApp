@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe "AuthenticationPages" do
+describe "Authentication" do
   
   subject { page }
 
-  describe "signin page" do
+  describe "validates signin page look" do
     before { visit signin_path }
 
     it { should have_selector('h1',    text: 'Sign in') }
@@ -33,6 +33,21 @@ describe "AuthenticationPages" do
       it { should_not have_link('Sign in', href: signin_path) }
     end # with valid info
   end
+
+  describe "authorize" do
+
+    describe "non signed-in user" do
+      
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "visiting edit page" do
+        before { visit edit_user_path(user) }
+
+        it { should have_selector('title', text: 'Sign in') }
+      end # visit edit
+
+    end # non signed in
+  end # authorize
 end
 
 
