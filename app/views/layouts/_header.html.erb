@@ -13,6 +13,11 @@
 		  <% end %>
                   <li><%= link_to "Help", help_path %></li>
                   <li><%= link_to "Contacts", contacts_path %></li>
+                  <li>
+                    <%= form_tag('/search', method: :get, :class => "navbar-search" ) do %>
+                      <%= text_field_tag :search, params[:search], :id => 'search_field', :class => "search-query" %>
+                    <% end %>
+                  </li>
               </ul>
             </nav>
         </div><!-- class="container" -->

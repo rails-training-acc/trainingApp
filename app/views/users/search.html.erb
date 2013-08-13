@@ -1,0 +1,21 @@
+<% provide(:title, "Search results") %>
+
+<table class="table table-hover">
+	<h2>Found these users: </h2>
+	<thead>
+		<th>#</th>
+		<th>Name</th>
+		<th>Email</th>
+        <th>Userpic</th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user.id %></td>
+			<td><%= link_to user.name, user %></td>
+			<td><%= user.email %></td>
+            <td><%= user.image_url.present? ? image_tag(user.image_url, :size => "50x50") : image_tag("gravatar-user.png", :size => "50x50")%></td>
+		</tr>	
+		<% end %>
+	</tbody>
+</table>
