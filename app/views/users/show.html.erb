@@ -1,1 +1,26 @@
-<%= @user.name %> (<%= @user.email %>)
+<ul class="nav nav-pills">
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+      <%= @user.name %> (<%= @user.email %>)
+      <b class="caret"></b>
+    </a>
+
+    <ul class="dropdown-menu">
+      <!-- links -->
+      <li class="dropdown-submenu">
+        <a tabindex="-1" href="#">Settings</a>
+	<ul class="dropdown-menu">
+	  <li>
+	    <a tabindex="-1" href="/change_password">Change Password</a>
+	  </li>
+	  <li>
+	    <a tabindex="-1" href="/edit_profile">Edit Profile</a>
+	  </li>
+	</ul>
+      </li>									<li class="divider"></li>
+      <li>
+        <a ref="nofollow" data-method="delete" href="/signout">Sign Out</a>
+      </li>
+    </ul>
+  </li>
+</ul>
