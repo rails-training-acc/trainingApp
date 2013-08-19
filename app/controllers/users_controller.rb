@@ -40,4 +40,8 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def search
+    @users = User.search params[:search]
+  end
+
 end
