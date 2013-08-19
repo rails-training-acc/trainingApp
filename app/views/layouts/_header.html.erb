@@ -16,6 +16,7 @@
                   <li>
                     <%= form_tag('/search', method: :get, :class => "navbar-search" ) do %>
                       <%= text_field_tag :search, params[:search], :id => 'search_field', :class => "search-query" %>
+                      <%= submit_tag :submit, :id => 'submit_button', :style => "position: absolute; left: -9999px; width: 1px; height: 1px;" %>
                     <% end %>
                   </li>
               </ul>
